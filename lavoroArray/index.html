@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Esercizio Numeri Random</title>
+  <style>
+    body { font-family: Arial; }
+    table { border-collapse: collapse; margin-top: 10px; }
+    td, th { border: 1px solid black; padding: 5px; text-align: center; }
+  </style>
+</head>
+<body>
+
+
+<h2>Numeri casuali da -100 a 100</h2>
+
+
+<div id="output"></div>
+
+
+<script>
+  var numeri = [];
+  for (var i = 0; i < 100; i++) {
+    var numero = Math.floor(Math.random() * 201) - 100;
+    numeri.push(numero);
+  }
+
+
+  var somma = 0;
+  for (var i = 0; i < numeri.length; i++) {
+    somma += numeri[i];
+  }
+
+
+  var media = somma / numeri.length;
+
+
+  var max = numeri[0];
+  var min = numeri[0];
+  for (var i = 1; i < numeri.length; i++) {
+    if (numeri[i] > max) max = numeri[i];
+    if (numeri[i] < min) min = numeri[i];
+  }
+
+
+  var maggiori50 = [];
+  for (var i = 0; i < numeri.length; i++) {
+    if (numeri[i] > 50) maggiori50.push(numeri[i]);
+  }
+
+
+  var out = "<table><tr>";
+  for (var i = 0; i < numeri.length; i++) {
+    out += "<td>" + numeri[i] + "</td>";
+    if ((i + 1) % 10 === 0) out += "</tr><tr>";
+  }
+  out += "</tr></table>";
+
+
+  out += "<p><b>Media:</b> " + media.toFixed(2) + "</p>";
+  out += "<p><b>Massimo:</b> " + max + "</p>";
+  out += "<p><b>Minimo:</b> " + min + "</p>";
+  out += "<h3>Numeri maggiori di 50:</h3>";
+  out += "<p>" + maggiori50.join(", ") + "</p>";
+
+
+  document.getElementById("output").innerHTML = out;
+</script>
+
+
+</body>
+</html>
