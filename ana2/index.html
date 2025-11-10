@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form Anagrafica Utente</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background-color: #f4f4f9;
+}
+.container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+    text-align: center;
+}
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+input[type="number"], input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+input[type="button"] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+}
+input[type="button"]:hover {
+    background-color: #45a049;
+}
+#risultato {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+</style>
+</head>
+<body>
+
+
+<div class="container">
+<h2>Anagrafica Utente</h2>
+
+
+<label for="nome">Nome:</label>
+<input type="text" id="nome" required>
+
+
+<label for="cognome">Cognome:</label>
+<input type="text" id="cognome" required>
+
+
+<label for="indirizzo">Indirizzo:</label>
+<input type="text" id="indirizzo" required>
+
+
+<label for="citta">Città:</label>
+<input type="text" id="citta" required>
+
+
+<label for="cap">CAP:</label>
+<input type="text" id="cap" required>
+
+
+<label for="et">Età:</label>
+<input type="number" id="et" required>
+
+
+<label>Sesso:</label>
+<input type="radio" name="sesso" value="M">M<br>
+<input type="radio" name="sesso" value="F">F<br>
+<input type="radio" name="sesso" value="Altro">Altro<br><br>
+
+
+<label>Provincia:</label>
+<select id="prov" onchange="Validate()">
+<option value="0">Select</option>
+<option value="1">Milano</option>
+<option value="2">Pavia</option>
+</select>
+
+
+<div id="div1" style="visibility: hidden;">
+<select id="comMI" onchange="scelta_MI()">
+<option value="0">Select</option>
+<option value="1">Rho</option>
+<option value="2">Lainate</option>
+<option value="3">Parabiago</option>
+</select>
+</div>
+
+
+<div id="div2" style="visibility: hidden;">
+<select id="comPV" onchange="scelta_PV()">
+<option value="0">Select</option>
+<option value="1">Vigevano</option>
+<option value="2">Zavattarello</option>
+<option value="3">Godiasco</option>
+</select>
+</div>
+
+
+<br>
+
+
+<label>Mezzi di locomozione posseduti:</label><br>
+<input type="checkbox" id="box1" name="bici" value="bici" onclick="onClickHandler(document.getElementById('box1').value);">Bici<br>
+<input type="checkbox" id="box2" name="auto" value="auto" onclick="onClickHandler(document.getElementById('box2').value);">Auto<br>
+<input type="checkbox" id="box3" name="moto" value="moto" onclick="onClickHandler(document.getElementById('box3').value);">Moto<br>
+<input type="checkbox" id="box4" name="aereo" value="aereo" onclick="onClickHandler(document.getElementById('box4').value);">Aereo<br>
+<input type="checkbox" id="box5" name="yacht" value="yacht" onclick="onClickHandler(document.getElementById('box5').value);">Yacht<br>
+<p id="risp"></p>
+
+
+<label>Materie preferite (max 3):</label>
+<form name="MyForm">
+<select name="materie" multiple="multiple" style="height:100px">
+<option value="Matematica">Matematica</option>
+<option value="Italiano">Italiano</option>
+<option value="Storia">Storia</option>
+<option value="Geografia">Geografia</option>
+<option value="Informatica">Informatica</option>
+<option value="Scienze">Scienze</option>
+<option value="Arte">Arte</option>
+<option value="Educazione Fisica">Educazione Fisica</option>
+<option value="Inglese">Inglese</option>
+</select>
+<input type="button" onclick="seleziona()" value="premi">
+</form>
+<div id="scelta"></div>
+
+
+<br>
+<input type="button" value="Invia" onclick="myFunction()">
+
+
+<p id="risultato"></p>
+</div>
+
+
+<script>
+function myFunction() {
+let eta = parseInt(document.getElementById("et").value);
+let risultato = document.getElementById("risultato");
+
+
+switch (true) {
+case (eta <= 12):
+    risultato.textContent = "Generazione Alpha";
+    break;
+case (eta >= 13 && eta <= 28):
+    risultato.textContent = "Generazione Z";
+    break;
+case (eta >= 29 && eta <= 44):
+    risultato.textContent = "Millennials";
+    break;
+case (eta >= 45 && eta <= 60):
+    risultato.textContent = "Generazione X";
+    break;
+default:
+    risultato.textContent = "Sei anziano";
+}
+}
+
+
+function Validate() {
+let prov = document.getElementById("prov").value;
+if (prov == "1") {
+    document.getElementById("div1").style.visibility = "visible";
+    document.getElementById("div2").style.visibility = "hidden";
+} else if (prov == "2") {
+    document.getElementById("div2").style.visibility = "visible";
+    document.getElementById("div1").style.visibility = "hidden";
+} else {
+    document.getElementById("div1").style.visibility = "hidden";
+    document.getElementById("div2").style.visibility = "hidden";
+}
+}
+
+
+function onClickHandler(s){
+document.getElementById("risp").innerHTML += s + ", ";
+}
+
+
+function seleziona(){
+var options = document.forms.MyForm.materie.options;
+var selectedOptions = [];
+for (var i = 0; i < options.length; i++) {
+    if (options[i].selected) {
+        var x = options[i].value;
+        selectedOptions.push(x);
+    }
+}
+document.location.href="ricezione.html?materie="+selectedOptions;
+}
+</script>
+
+
+</body>
+</html>
+
+
+
