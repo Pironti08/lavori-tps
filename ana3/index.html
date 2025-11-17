@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anagrafica Generazionale</title>
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,7 +15,6 @@
       justify-content: center;
     }
 
-
     .container {
       display: flex;
       flex-wrap: wrap;
@@ -24,8 +24,7 @@
       justify-content: center;
     }
 
-
-    form, #risultato {
+    form, #output {
       flex: 1 1 400px;
       max-width: 500px;
       background-color: #fff;
@@ -34,18 +33,15 @@
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
 
-
     h2 {
       text-align: center;
       margin-bottom: 20px;
     }
 
-
     label {
       display: block;
       margin: 10px 0 5px;
     }
-
 
     input[type="text"], input[type="number"], input[type="date"], select {
       width: 100%;
@@ -55,14 +51,12 @@
       border-radius: 4px;
     }
 
-
     .radio-group, .checkbox-group {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 15px;
     }
-
 
     input[type="button"] {
       background-color: #4CAF50;
@@ -74,13 +68,11 @@
       width: 100%;
     }
 
-
     input[type="button"]:hover {
       background-color: #45a049;
     }
 
-
-    #risultato {
+    #output {
       font-weight: bold;
       font-size: 1.1em;
       display: flex;
@@ -88,42 +80,40 @@
       justify-content: center;
       text-align: center;
       min-height: 150px;
+      background: #f9f9f9;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
+
 <body>
   <div class="container">
+
     <form>
       <h2>Anagrafica Generazionale</h2>
 
-
       <label for="nome">Nome</label>
-      <input type="text" id="nome" name="nome" required>
-
+      <input type="text" id="nome" required>
 
       <label for="cognome">Cognome</label>
-      <input type="text" id="cognome" name="cognome" required>
-
+      <input type="text" id="cognome" required>
 
       <label for="indirizzo">Indirizzo</label>
-      <input type="text" id="indirizzo" name="indirizzo">
-
+      <input type="text" id="indirizzo">
 
       <label for="citta">Città</label>
-      <input type="text" id="citta" name="citta">
-
+      <input type="text" id="citta">
 
       <label for="cap">CAP</label>
-      <input type="text" id="cap" name="cap">
-
+      <input type="text" id="cap">
 
       <label for="eta">Età</label>
-      <input type="number" id="eta" name="eta" placeholder="Età attuale">
-
+      <input type="number" id="eta" placeholder="Età attuale">
 
       <label for="dataNascita">Data di nascita</label>
-      <input type="date" id="dataNascita" name="dataNascita">
-
+      <input type="date" id="dataNascita">
 
       <label>Sesso</label>
       <div class="radio-group">
@@ -132,9 +122,8 @@
         <label><input type="radio" name="sesso" value="Altro"> Altro</label>
       </div>
 
-
       <label for="provincia">Provincia</label>
-      <select id="provincia" name="provincia">
+      <select id="provincia">
         <option value="">-- Seleziona la provincia --</option>
         <option>RM - Roma</option>
         <option>MI - Milano</option>
@@ -145,7 +134,6 @@
         <option>BA - Bari</option>
       </select>
 
-
       <label>Mezzi di locomozione posseduti in famiglia</label>
       <div class="checkbox-group">
         <label><input type="checkbox" name="mezzi" value="Auto"> Auto</label>
@@ -155,9 +143,8 @@
         <label><input type="checkbox" name="mezzi" value="Yacht"> Elicottero</label>
       </div>
 
-
       <label for="materie">Materie preferite (max 3)</label>
-      <select id="materie" name="materie" multiple>
+      <select id="materie" multiple>
         <option>Matematica</option>
         <option>Italiano</option>
         <option>Inglese</option>
@@ -169,18 +156,16 @@
         <option>Informatica</option>
       </select>
 
-
       <input type="button" value="Invia dati" onclick="stampa()">
     </form>
 
-
-    <div id="risultato">
+    <div id="output">
       premi "Invia dati" per vedere il riepilogo qui.
     </div>
+
   </div>
+
   <script src="script.js"></script>
+
 </body>
 </html>
-
-
-
