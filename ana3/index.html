@@ -16,21 +16,32 @@
     }
 
     .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 30px;
       max-width: 1000px;
       width: 100%;
-      justify-content: center;
+      overflow: auto;
+      padding: 10px;
     }
 
-    form, #output {
-      flex: 1 1 400px;
-      max-width: 500px;
+    form {
+      float: left;
+      width: 45%;
       background-color: #fff;
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    #output {
+      float: right;
+      width: 45%;
+      background-color: #fff;
+      min-height: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: left;
     }
 
     h2 {
@@ -70,20 +81,6 @@
 
     input[type="button"]:hover {
       background-color: #45a049;
-    }
-
-    #output {
-      font-weight: bold;
-      font-size: 1.1em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      min-height: 150px;
-      background: #f9f9f9;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -169,3 +166,4 @@
 
 </body>
 </html>
+
