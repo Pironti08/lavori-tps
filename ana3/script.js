@@ -83,7 +83,7 @@ function stampa() {
             cap: cap
         }
     };
-    document.getElementById("output").innerHTML = `
+    document.getElementById("output").innerHTML = 
     "<h2>Dati Inseriti</h2>" +
     "<p><strong>Nome:</strong> " + persona.nome + "</p>" +
     "<p><strong>Cognome:</strong> " + persona.cognome + "</p>" +
