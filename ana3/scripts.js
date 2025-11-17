@@ -26,7 +26,6 @@ function stampa() {
         }
     }
 
-
     let materie = [];
     let selected = document.getElementById("materie").selectedOptions;
 
@@ -34,7 +33,6 @@ function stampa() {
         let opzione = selected[i];
         materie.push(opzione.value);
     }
-
 
     let mezziPosseduti;
     if (mezzi.length > 0) {
@@ -85,7 +83,6 @@ function stampa() {
             cap: cap
         }
     };
-
     document.getElementById("output").innerHTML = `
       <h2>Dati Inseriti</h2>
       <p><strong>Nome:</strong> ${persona.nome}</p>
