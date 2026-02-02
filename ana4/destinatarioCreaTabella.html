@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Tabella Persone</title>
+<style>
+  table { border-collapse: collapse; width: 80%; margin: 20px auto; }
+  th, td { border: 1px solid #000; padding: 8px; text-align: left; }
+  th { background-color: #f4f4f4; }
+</style>
+</head>
+<body>
+<h2>Tabella Persone</h2>
+<table>
+  <thead>
+    <tr>
+      <th>Indice</th>
+      <th>Nome</th>
+      <th>Cognome</th>
+      <th>Età</th>
+    </tr>
+  </thead>
+  <tbody id="tabellaPersone"></tbody>
+</table>
+
+<script>
+  const persone = JSON.parse(localStorage.getItem("persone") || "[]");
+  const params = new URLSearchParams(window.location.search);
+  const indici = params.get("indici") ? params.get("indici").split(",") : [];
+
+  const tbody = document.getElementById("tabellaPersone");
+  persone.forEach((p, i) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = "<td>" + (indici[i] || "--") + "</td>" +
+                     "<td>" + p.nome + "</td>" +
+                     "<td>" + p.cognome + "</td>" +
+                     "<td>" + p.eta + "</td>";
+      tbody.appendChild(tr);
+  });
+</script>
+</body>
+</html>
+
+
