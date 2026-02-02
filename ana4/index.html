@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anagrafica Generazionale</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 30px;
+      background: #f4f4f9;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      overflow: auto;
+      padding: 10px;
+    }
+
+    form {
+      float: left;
+      width: 45%;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    #output {
+      float: right;
+      width: 45%;
+      background-color: #fff;
+      min-height: 400px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      font-weight: bold;
+      font-size: 1.1em;
+      text-align: left;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input[type="text"], input[type="number"], input[type="date"], select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .radio-group, .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input[type="button"], input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    input[type="button"]:hover, input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- FORM ESISTENTE -->
+    <form>
+      <h2>Anagrafica Generazionale</h2>
+
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" required>
+
+      <label for="cognome">Cognome</label>
+      <input type="text" id="cognome" required>
+
+      <label for="indirizzo">Indirizzo</label>
+      <input type="text" id="indirizzo">
+
+      <label for="citta">Città</label>
+      <input type="text" id="citta">
+
+      <label for="cap">CAP</label>
+      <input type="text" id="cap">
+
+      <label for="eta">Età</label>
+      <input type="number" id="eta" placeholder="Età attuale">
+
+      <label for="dataNascita">Data di nascita</label>
+      <input type="date" id="dataNascita">
+
+      <label>Sesso</label>
+      <div class="radio-group">
+        <label><input type="radio" name="sesso" value="M"> M</label>
+        <label><input type="radio" name="sesso" value="F"> F</label>
+        <label><input type="radio" name="sesso" value="Altro"> Altro</label>
+      </div>
+
+      <label for="provincia">Provincia</label>
+      <select id="provincia">
+        <option value="">-- Seleziona la provincia --</option>
+        <option>RM - Roma</option>
+        <option>MI - Milano</option>
+        <option>NA - Napoli</option>
+        <option>TO - Torino</option>
+        <option>FI - Firenze</option>
+        <option>VE - Palermo</option>
+        <option>BA - Bari</option>
+      </select>
+
+      <label>Mezzi di locomozione posseduti in famiglia</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="mezzi" value="Auto"> Auto</label>
+        <label><input type="checkbox" name="mezzi" value="Moto"> Moto</label>
+        <label><input type="checkbox" name="mezzi" value="Bici"> Bici</label>
+        <label><input type="checkbox" name="mezzi" value="Monopattino"> Monopattino</label>
+        <label><input type="checkbox" name="mezzi" value="Elicottero"> Elicottero</label>
+      </div>
+
+      <label for="materie">Materie preferite (max 3)</label>
+      <select id="materie" multiple>
+        <option>Matematica</option>
+        <option>Italiano</option>
+        <option>Inglese</option>
+        <option>TPS</option>
+        <option>Storia</option>
+        <option>Sistemi</option>
+        <option>TLC</option>
+        <option>Educazione fisica</option>
+        <option>Informatica</option>
+      </select>
+
+      <input type="button" value="Invia dati" onclick="stampa()">
+    </form>
+
+    <div id="output">
+      premi "Invia dati" per vedere il riepilogo qui.
+    </div>
+
+    <!-- NUOVO FORM PER INSERIMENTO MULTIPLO -->
+    <form name="frmMaschera" action="destinatarioCreaTabella.html" method="get">
+      <h2>Passaggio di parametri facendo uso del method get</h2>
+      <h3>Inserire dati solo &lt; 10</h3>
+
+      righe: <input type="number" name="txtR"> <br>
+      colonne: <input type="number" name="txtC"> <br>
+
+      <input type="submit" value="trasmetti dati" onclick="salvaPersone()">
+    </form>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
