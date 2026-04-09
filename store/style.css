@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1f1c2c, #928dab);
+    color: white;
+    text-align: center;
+}
+
+h2 {
+    margin-top: 20px;
+}
+
+input[type="file"],
+input[type="text"] {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    border: none;
+}
+
+#prodotti {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.card {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    padding: 15px;
+    border-radius: 15px;
+    width: 230px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #ff512f, #dd2476);
+    color: white;
+    font-weight: bold;
+    width: 100%;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+#dettaglio {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#dettaglio .card {
+    text-align: center;
+    width: 300px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

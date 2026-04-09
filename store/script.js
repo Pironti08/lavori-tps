@@ -1,89 +1,136 @@
+var prodotti = [];
 var carrello = [];
 var utente = null;
 
-document.getElementById("fileInput").onchange = function(event) {
-    var file = event.target.files[0];
-    var reader = new FileReader();
 
-    reader.onload = function(e) {
-        var testo = e.target.result;
-        var righe = testo.split("\n");
+var input = document.getElementById("fileInput");
 
-        var contenitore = document.getElementById("prodotti");
-        contenitore.innerHTML = "";
+if (input) {
+    input.onchange = function (e) {
 
-        for (var i = 1; i < righe.length; i++) {
+        var file = e.target.files[0];
+        var reader = new FileReader();
 
-            if (righe[i].trim() == "") continue;
+        reader.onload = function (event) {
 
-            var colonne = righe[i].split(",");
+            var righe = event.target.result.split("\n");
+            prodotti = [];
 
-            if (colonne.length < 4) continue;
+            for (var i = 1; i < righe.length; i++) {
 
-            var tipo = colonne[0].trim();
-            var nome = colonne[1].trim();
-            var descrizione = colonne[2].trim();
-            var prezzo = colonne[3].trim();
+                if (righe[i].trim() === "") continue;
 
-            var div = document.createElement("div");
-            div.className = "card";
+                var c = righe[i].split(",");
 
-            div.innerHTML =
-                "<h3>" + nome + "</h3>" +
-                "<p>Tipo: " + tipo + "</p>" +
-                "<p>" + descrizione + "</p>" +
-                "<p>Prezzo: " + prezzo + " euro</p>" +
-                "<button onclick=\"aggiungiCarrello('" + nome + "'," + prezzo + ")\">Aggiungi</button>";
+                prodotti.push({
+                    tipo: c[0],
+                    nome: c[1],
+                    descrizione: c[2],
+                    prezzo: c[3]
+                });
+            }
 
-            contenitore.appendChild(div);
-        }
+            mostraProdotti();
+        };
+
+        reader.readAsText(file, "UTF-8");
     };
+}
 
-    reader.readAsText(file, "UTF-8");
-};
 
-function registrati() {
-    var nome = document.getElementById("nome").value;
-    var email = document.getElementById("email").value;
+function mostraProdotti() {
 
-    if (nome != "" && email != "") {
-        utente = { nome: nome, email: email };
-        alert("Registrazione completata");
-    } else {
-        alert("Compila tutti i campi");
+    var div = document.getElementById("prodotti");
+    div.innerHTML = "";
+
+    for (var i = 0; i < prodotti.length; i++) {
+
+        var p = prodotti[i];
+
+        div.innerHTML += `
+        <div class="card">
+            <h3>${p.nome}</h3>
+            <p>Tipo: ${p.tipo}</p>
+            <p>Prezzo: ${p.prezzo} euro</p>
+            <button onclick="vaiDettaglio(${i})">Dettaglio</button>
+        </div>`;
     }
 }
 
-function aggiungiCarrello(nome, prezzo) {
-    var prodotto = { nome: nome, prezzo: prezzo };
-    carrello.push(prodotto);
+
+function vaiDettaglio(i) {
+    localStorage.setItem("prodotto", JSON.stringify(prodotti[i]));
+    window.location.href = "dettaglio.html";
+}
+
+
+var d = document.getElementById("dettaglio");
+
+if (d) {
+
+    var p = JSON.parse(localStorage.getItem("prodotto"));
+
+    d.innerHTML =
+        "<div class='card'>" +
+        "<h3>" + p.nome + "</h3>" +
+        "<p>" + p.tipo + "</p>" +
+        "<p>" + p.descrizione + "</p>" +
+        "<p>Prezzo: " + p.prezzo + " euro</p>" +
+        "<button onclick='aggiungiCarrello()'>Aggiungi al carrello</button>" +
+        "</div>";
+}
+
+
+function aggiungiCarrello() {
+
+    var p = JSON.parse(localStorage.getItem("prodotto"));
+
+    carrello.push(p);
     aggiornaCarrello();
 }
 
 function aggiornaCarrello() {
+
     var div = document.getElementById("carrello");
-    div.innerHTML = "";
+
+    if (!div) return;
 
     var totale = 0;
+    div.innerHTML = "";
 
     for (var i = 0; i < carrello.length; i++) {
-        div.innerHTML += carrello[i].nome + " - " + carrello[i].prezzo + " euro<br>";
-        totale = totale + parseFloat(carrello[i].prezzo);
+
+        div.innerHTML += carrello[i].nome + "<br>";
+        totale += parseFloat(carrello[i].prezzo);
     }
 
-    div.innerHTML += "<b>Totale: " + totale + " euro</b>";
+    div.innerHTML += "<br><b>Totale: " + totale + " euro</b>";
 }
 
+
+function registrati() {
+
+    var nome = document.getElementById("nome").value;
+    var email = document.getElementById("email").value;
+
+    if (nome && email) {
+        utente = { nome: nome, email: email };
+        alert("Registrazione completata!");
+    }
+}
+
+
 function acquista() {
-    if (utente == null) {
-        alert("Devi registrarti");
+
+    if (!utente) {
+        alert("Devi registrarti!");
         return;
     }
 
-    if (carrello.length == 0) {
-        alert("Carrello vuoto");
+    if (carrello.length === 0) {
+        alert("Carrello vuoto!");
         return;
     }
 
-    alert("Acquisto completato da " + utente.nome);
+    window.print();
 }
