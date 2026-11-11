@@ -1,28 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pironti</title>
-    <link rel="stylesheet" href="https://star08-web.pages.dev/css/pico/pico.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mini Dashboard Meteo</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <main class="container">
-        <ul>
-            <li><a href="./lavoroArray/index.html" target="_blank" rel="noopener noreferrer" role="button">Lavoro Array
-                    Griglia Numeri</a></li>
-                        <li><a href="./ana2/index.html" target="_blank" rel="noopener noreferrer" role="button">Lavoro
-                    Anagrafica 2</a></li>
-                                    <li><a href="./ana3/index.html" target="_blank" rel="noopener noreferrer" role="button">Lavoro 
-                    Anagrafica 3</a></li>
-                                                <li><a href="./ana4/index.html" target="_blank" rel="noopener noreferrer" role="button">Lavoro 
-                    Anagrafica 4</a></li>
-                                                            <li><a href="./store/index.html" target="_blank" rel="noopener noreferrer" role="button">Lavoro 
-                    NEgozio</a></li>
-        </ul>
-    </main>
-</body>
+  <main>
+    <h1>Mini Dashboard Meteo</h1>
+    <p class="intro">Scrivi il nome di una città e premi Cerca.</p>
 
+    <div class="ricerca">
+      <label for="citta">Città</label>
+      <input type="text" id="citta" placeholder="Es. Torino">
+      <button id="btnCerca">Cerca</button>
+    </div>
+
+    <p id="messaggio"></p>
+
+    <section id="risultato" class="nascosto">
+      <h2 id="nomeLuogo"></h2>
+
+      <div class="attuale">
+        <p>Temperatura: <strong id="temperatura"></strong></p>
+        <p>Vento: <strong id="vento"></strong></p>
+        <p>Condizione: <strong id="condizione"></strong></p>
+      </div>
+
+      <h3>Prossimi 3 giorni</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Giorno</th>
+            <th>Min</th>
+            <th>Max</th>
+          </tr>
+        </thead>
+        <tbody id="previsioni"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
 </html>
