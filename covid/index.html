@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andamento nazionale COVID-19</title>
+    <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+    <h1>Andamento nazionale COVID-19</h1>
+    <p>I dati sono caricati dal file JSON pubblicato su GitHub dalla Protezione Civile.</p>
+    <p>Ogni riga rappresenta una giornata; ogni colonna contiene un dato relativo a quella giornata.</p>
+    <p id="messaggio">Caricamento dati in corso...</p>
+
+    <div class="tabella-contenitore">
+        <table id="tabella">
+            <caption>Dati nazionali COVID-19 per data</caption>
+            <thead id="intestazione-tabella"></thead>
+            <tbody id="corpo-tabella"></tbody>
+        </table>
+    </div>
+
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "https://raw.githubusercontent.com/pcm-dpc/COVID-19/master/dati-json/dpc-covid19-ita-andamento-nazionale.json";
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    var dati = JSON.parse(this.responseText);
+                    var intestazione = "";
+                    var righe = "";
+
+                    if (dati.length > 0) {
+                        // Leggo le chiavi del primo oggetto per creare le intestazioni.
+                        var keys = Object.keys(dati[0]);
+                        var numeroChiavi = Object.keys(dati[0]).length;
+
+                        intestazione += "<tr>";
+                        for (var j = 0; j < numeroChiavi; j++) {
+                            intestazione += "<th>" + keys[j] + "</th>";
+                        }
+                        intestazione += "</tr>";
+
+                        // Creo una riga per ogni giornata e una cella per ogni chiave.
+                        for (var i = 0; i < dati.length; i++) {
+                            var chiavi = Object.keys(dati[i]);
+                            righe += "<tr>";
+
+                            for (var k = 0; k < chiavi.length; k++) {
+                                var chiave = chiavi[k];
+                                var valore = dati[i][chiave];
+
+                                if (valore === null || valore === undefined) {
+                                    valore = "";
+                                }
+
+                                righe += "<td>" + valore + "</td>";
+                            }
+
+                            righe += "</tr>";
+                        }
+
+                        document.getElementById("intestazione-tabella").innerHTML = intestazione;
+                        document.getElementById("corpo-tabella").innerHTML = righe;
+                        document.getElementById("messaggio").innerHTML =
+                            "Dati caricati: " + dati.length + " giornate.";
+                    } else {
+                        document.getElementById("messaggio").innerHTML = "Il file JSON non contiene dati.";
+                    }
+                } else {
+                    document.getElementById("messaggio").innerHTML =
+                        "Errore nel caricamento dei dati. Riprova più tardi.";
+                }
+            }
+        };
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    </script>
+</body>
+</html>

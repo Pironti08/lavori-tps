@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anagrafica</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 25px;
+            background-color: #f2f5f8;
+        }
+
+
+        #messaggio {
+            font-weight: bold;
+        }
+
+
+        .tabella-contenitore {
+            overflow-x: auto;
+        }
+
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+        }
+
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+
+        th {
+            background-color: #173b63;
+            color: white;
+        }
+
+
+        tr:nth-child(even) {
+            background-color: #e6edf4;
+        }
+    </style>
+</head>
+<body>
+    <p id="messaggio"></p>
+
+
+    <div class="tabella-contenitore">
+        <table id="tabella">
+            <thead id="intestazione-tabella"></thead>
+            <tbody id="corpo-tabella"></tbody>
+        </table>
+    </div>
+
+
+    <script>
+        var xmlhttp = new XMLHttpRequest();
+        var url = "anagrafica.xml";
+
+
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState == 4) {
+                if (this.status == 200) {
+                    myFunction(this);
+                } else {
+                    document.getElementById("messaggio").innerHTML =
+                        "Errore nel caricamento dei dati. Riprova più tardi.";
+                }
+            }
+        };
+
+
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+
+
+        function myFunction(file) {
+            var dati = file.responseXML.getElementsByTagName("utente");
+            var intestazione = "";
+            var righe = "";
+
+
+            if (dati.length > 0) {
+                var keys = dati[0].children;
+                var numeroChiavi = keys.length;
+
+
+                intestazione += "<tr>";
+                for (var j = 0; j < numeroChiavi; j++) {
+                    intestazione += "<th>" + keys[j].tagName + "</th>";
+                }
+                intestazione += "</tr>";
+
+
+                for (var i = 0; i < dati.length; i++) {
+                    var chiavi = dati[i].children;
+                    righe += "<tr>";
+
+
+                    for (var k = 0; k < chiavi.length; k++) {
+                        var valore = chiavi[k].textContent;
+
+
+                        righe += "<td>" + valore + "</td>";
+                    }
+
+
+                    righe += "</tr>";
+                }
+
+
+                document.getElementById("intestazione-tabella").innerHTML = intestazione;
+                document.getElementById("corpo-tabella").innerHTML = righe;
+                document.getElementById("messaggio").innerHTML =
+                    "Dati caricati: " + dati.length + " persone.";
+            } else {
+                document.getElementById("messaggio").innerHTML = "Il file XML non contiene dati.";
+            }
+        }
+    </script>
+</body>
+</html>
+
+

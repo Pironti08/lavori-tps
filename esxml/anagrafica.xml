@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scuola>
+ <classe>
+  <utente>
+   <nome>Christian</nome>
+   <cognome>Pironti</cognome>
+   <data_nascita>12/03/2007</data_nascita>
+   <luogo_nascita>Milano</luogo_nascita>
+   <residenza>Via Roma 10, Milano</residenza>
+  </utente>
+  <utente>
+   <nome>Gioele</nome>
+   <cognome>Runza</cognome>
+   <data_nascita>25/07/2007</data_nascita>
+   <luogo_nascita>Monza</luogo_nascita>
+   <residenza>Via Verdi 23, Monza</residenza>
+  </utente>
+  <utente>
+   <nome>Leonardo</nome>
+   <cognome>Paparo</cognome>
+   <data_nascita>03/11/2006</data_nascita>
+   <luogo_nascita>Bergamo</luogo_nascita>
+   <residenza>Via Dante 5, Bergamo</residenza>
+  </utente>
+  <utente>
+   <nome>Cristian</nome>
+   <cognome>Ferrigolo</cognome>
+   <data_nascita>18/01/2007</data_nascita>
+   <luogo_nascita>Como</luogo_nascita>
+   <residenza>Via Manzoni 7, Como</residenza>
+  </utente>
+  <utente>
+   <nome>Elias</nome>
+   <cognome>Fornaro</cognome>
+   <data_nascita>30/09/2006</data_nascita>
+   <luogo_nascita>Varese</luogo_nascita>
+   <residenza>Via Mazzini 41, Varese</residenza>
+  </utente>
+ </classe>
+</scuola>
+
+
