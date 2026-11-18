@@ -1,0 +1,32 @@
+[
+    {
+        "nome": "Pasta Barilla",
+        "categoria": "Food",
+        "prezzo": 1.50,
+        "quantita": "500 g"
+    },
+    {
+        "nome": "Biscotti Mulino Bianco",
+        "categoria": "Food",
+        "prezzo": 2.20,
+        "quantita": "350 g"
+    },
+    {
+        "nome": "Shampoo",
+        "categoria": "Non Food",
+        "prezzo": 3.90,
+        "quantita": "250 ml"
+    },
+    {
+        "nome": "Detersivo Lavatrice",
+        "categoria": "Non Food",
+        "prezzo": 5.50,
+        "quantita": "2 L"
+    },
+    {
+        "nome": "Succo di Arancia",
+        "categoria": "Food",
+        "prezzo": 2.00,
+        "quantita": "1 L"
+    }
+]

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Elenco Prodotti</title>
+
+    <style>
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #prodotti {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .prodotto {
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 250px;
+            margin: 10px;
+            padding: 15px;
+        }
+
+        .prodotto h2 {
+            color: #333;
+        }
+
+        .prezzo {
+            color: green;
+            font-weight: bold;
+        }
+
+        @media (max-width: 600px) {
+
+            .prodotto {
+                width: 90%;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Elenco Prodotti</h1>
+
+    <div id="prodotti"></div>
+
+
+    <script>
+
+        var richiesta = new XMLHttpRequest();
+
+        richiesta.open("GET", "prodotti.json", true);
+
+        richiesta.onreadystatechange = function() {
+
+            if (richiesta.readyState == 4 && richiesta.status == 200) {
+
+                var prodotti = JSON.parse(richiesta.responseText);
+
+                var contenitore = document.getElementById("prodotti");
+
+                for (var i = 0; i < prodotti.length; i++) {
+
+                    var prodotto = prodotti[i];
+
+                    contenitore.innerHTML +=
+                        "<div class='prodotto'>" +
+                            "<h2>" + prodotto.nome + "</h2>" +
+                            "<p>Categoria: " + prodotto.categoria + "</p>" +
+                            "<p>Quantità: " + prodotto.quantita + "</p>" +
+                            "<p class='prezzo'>Prezzo: € " + prodotto.prezzo + "</p>" +
+                        "</div>";
+
+                }
+
+            }
+
+        };
+
+        richiesta.send();
+
+    </script>
+
+</body>
+</html>
